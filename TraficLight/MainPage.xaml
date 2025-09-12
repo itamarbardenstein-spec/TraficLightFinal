@@ -7,13 +7,13 @@
              x:DataType="vm:MainPageVM">
     <Grid RowDefinitions="Auto,Auto,Auto,Auto" >
         <Frame>
-            <BoxView BackgroundColor="Red"/>
+            <BoxView BackgroundColor="{Binding RedColor}"/>
         </Frame>
         <Frame Grid.Row="1">
-            <BoxView BackgroundColor="Yellow"/>
+            <BoxView BackgroundColor="{Binding YellowColor}"/>
         </Frame>
         <Frame Grid.Row="2">
-            <BoxView BackgroundColor="Green"/>
+            <BoxView BackgroundColor="{Binding GreenColor}"/>
         </Frame>
         <Button Grid.Row="3" Text="{x:Static m:Strings.ChangeLightText}" Command="{Binding ChangeLightCommand}"/>
     </Grid>
