@@ -10,7 +10,7 @@ namespace TraficLight.ViewModels
         public Color RedColor => tl.RedColor;
         public Color YellowColor => tl.YellowColor;
         public Color GreenColor => tl.GreenColor;
-
+        public string LightImage => tl.LightImage;
         private void ChangeLight()
         {
             tl.ChangeLight();
@@ -39,6 +39,7 @@ namespace TraficLight.ViewModels
                     OnPropertyChanged(nameof(GreenColor));
                     break;
             }
+            OnPropertyChanged(nameof(LightImage));
         }
     }
 }

@@ -1,20 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:TraficLight.ViewModels"
-             xmlns:m="clr-namespace:TraficLight.Models"
-             x:Class="TraficLight.MainPage"
-             x:DataType="vm:MainPageVM">
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto" >
+<ContentPage
+    x:Class="TraficLight.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:m="clr-namespace:TraficLight.Models"
+    xmlns:vm="clr-namespace:TraficLight.ViewModels"
+    x:DataType="vm:MainPageVM">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="5">
         <Frame>
-            <BoxView BackgroundColor="{Binding RedColor}"/>
+            <BoxView BackgroundColor="{Binding RedColor}" />
         </Frame>
         <Frame Grid.Row="1">
-            <BoxView BackgroundColor="{Binding YellowColor}"/>
+            <BoxView BackgroundColor="{Binding YellowColor}" />
         </Frame>
         <Frame Grid.Row="2">
-            <BoxView BackgroundColor="{Binding GreenColor}"/>
+            <BoxView BackgroundColor="{Binding GreenColor}" />
         </Frame>
-        <Button Grid.Row="3" Text="{x:Static m:Strings.ChangeLightText}" Command="{Binding ChangeLightCommand}"/>
+        <Button
+            Grid.Row="3"
+            Command="{Binding ChangeLightCommand}"
+            Text="{x:Static m:Strings.ChangeLightText}" />
+        <Image
+            Grid.Row="4"
+            HorizontalOptions="Center"
+            Source="{Binding LightImage}"
+            VerticalOptions="Center" />
     </Grid>
 </ContentPage>

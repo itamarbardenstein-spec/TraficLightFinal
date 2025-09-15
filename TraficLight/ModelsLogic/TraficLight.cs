@@ -4,6 +4,7 @@ namespace TraficLight.ModelsLogic
 {
     internal class TraficLight : TraficLightModel
     {
+        public override string LightImage => lightImage.GetLightImage(currentState);
         public override void ChangeLight()
         {
             if (currentState == TraficLightState.Red)
@@ -18,24 +19,26 @@ namespace TraficLight.ModelsLogic
                 lights[(int)TraficLight.Red].IsOn = false;
                 lights[(int)TraficLight.Yellow].IsOn = false;
                 lights[(int)TraficLight.Green].IsOn = true;
-                for (int i = 0; i < 3; i++)
-                    LightChanged?.Invoke(this, new LightChengedEventArgs((TraficLight)i));
+                foreach(TraficLight tl in Enum.GetValues<TraficLight>())
+                    LightChanged?.Invoke(this, new LightChengedEventArgs(tl));
             }
             else if (currentState == TraficLightState.Green)
             {
                 currentState = TraficLightState.Yellow;
                 lights[(int)TraficLight.Green].IsOn = false;
                 lights[(int)TraficLight.Yellow].IsOn = true;
-                for (int i = 1; i < 3; i++)
-                    LightChanged?.Invoke(this, new LightChengedEventArgs((TraficLight)i));
+                foreach (TraficLight tl in Enum.GetValues<TraficLight>())
+                    if(tl != TraficLight.Red)
+                        LightChanged?.Invoke(this, new LightChengedEventArgs(tl));
             }
             else if (currentState == TraficLightState.Yellow)
             {
                 currentState = TraficLightState.Red;
                 lights[(int)TraficLight.Red].IsOn = true;
                 lights[(int)TraficLight.Yellow].IsOn = false;
-                for (int i = 0; i < 2; i++)
-                    LightChanged?.Invoke(this, new LightChengedEventArgs((TraficLight)i));
+                foreach (TraficLight tl in Enum.GetValues<TraficLight>())
+                    if (tl != TraficLight.Green)
+                        LightChanged?.Invoke(this, new LightChengedEventArgs(tl));
             }
         }
     }
