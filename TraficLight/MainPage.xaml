@@ -6,7 +6,7 @@
     xmlns:m="clr-namespace:TraficLight.Models"
     xmlns:vm="clr-namespace:TraficLight.ViewModels"
     x:DataType="vm:MainPageVM">
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="5">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*" RowSpacing="5">
         <Frame>
             <BoxView BackgroundColor="{Binding RedColor}" />
         </Frame>
@@ -20,8 +20,12 @@
             Grid.Row="3"
             Command="{Binding ChangeLightCommand}"
             Text="{x:Static m:Strings.ChangeLightText}" />
-        <Image
+        <Button
             Grid.Row="4"
+            Command="{Binding SwitchAutoChangeCommand}"
+            Text="{Binding SwitchChangeLightText}" />
+        <Image
+            Grid.Row="5"
             HorizontalOptions="Center"
             Source="{Binding LightImage}"
             VerticalOptions="Center" />

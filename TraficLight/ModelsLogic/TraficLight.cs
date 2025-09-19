@@ -1,10 +1,23 @@
-﻿using TraficLight.Models;
+﻿using System.Timers;
+using TraficLight.Models;
 
 namespace TraficLight.ModelsLogic
 {
     internal class TraficLight : TraficLightModel
     {
         public override string LightImage => lightImage.GetLightImage(currentState);
+
+        public override string SwitchChangeLightText => isAutoChange ? Strings.StopAutiChangeLightText : Strings.StartAutiChangeLightText;
+        public TraficLight()
+        {
+            timer.Elapsed += OnTimerElapsed;
+        }
+
+        private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+        {
+            ChangeLight();
+        }
+
         public override void ChangeLight()
         {
             if (currentState == TraficLightState.Red)
@@ -40,6 +53,15 @@ namespace TraficLight.ModelsLogic
                     if (tl != TraficLight.Green)
                         LightChanged?.Invoke(this, new LightChengedEventArgs(tl));
             }
+        }
+
+        public override void SwitchAutoChange()
+        {
+            isAutoChange = !isAutoChange;
+            if (isAutoChange)
+                timer.Start();
+            else
+                timer.Stop();
         }
     }
 }

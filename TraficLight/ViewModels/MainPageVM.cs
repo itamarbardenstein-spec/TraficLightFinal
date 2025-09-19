@@ -7,10 +7,19 @@ namespace TraficLight.ViewModels
     {
         private ModelsLogic.TraficLight tl = new ();
         public ICommand ChangeLightCommand { get => new Command(ChangeLight); }
+        public ICommand SwitchAutoChangeCommand { get => new Command(SwitchAutoChange); }
+
+        private void SwitchAutoChange()
+        {
+            tl.SwitchAutoChange();
+            OnPropertyChanged(nameof(SwitchChangeLightText));
+        }
+
         public Color RedColor => tl.RedColor;
         public Color YellowColor => tl.YellowColor;
         public Color GreenColor => tl.GreenColor;
         public string LightImage => tl.LightImage;
+        public string SwitchChangeLightText => tl.SwitchChangeLightText; 
         private void ChangeLight()
         {
             tl.ChangeLight();
