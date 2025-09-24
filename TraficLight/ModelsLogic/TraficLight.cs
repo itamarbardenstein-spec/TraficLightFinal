@@ -66,6 +66,7 @@ namespace TraficLight.ModelsLogic
 
         public override void ChangeTimerTime()
         {
+            if(SecondsOfTimer!=0)
             timer.Interval = SecondsOfTimer * 1000;
         }
     }
