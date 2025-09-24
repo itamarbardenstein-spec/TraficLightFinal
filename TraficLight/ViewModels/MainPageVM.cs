@@ -3,23 +3,28 @@ using TraficLight.Models;
 
 namespace TraficLight.ViewModels
 {
-    class MainPageVM:ObservableObject
+    class MainPageVM : ObservableObject
     {
-        private ModelsLogic.TraficLight tl = new ();
+        private ModelsLogic.TraficLight tl = new();
         public ICommand ChangeLightCommand { get => new Command(ChangeLight); }
         public ICommand SwitchAutoChangeCommand { get => new Command(SwitchAutoChange); }
+        public ICommand ChangeTimerTimeCommand => new Command(ChangeTimerTime);
+        private void ChangeTimerTime()
+        {
+            tl.ChangeTimerTime();
+        }
 
         private void SwitchAutoChange()
         {
             tl.SwitchAutoChange();
             OnPropertyChanged(nameof(SwitchChangeLightText));
         }
-
+        public double SecondsOfTimer { get => tl.SecondsOfTimer; set => tl.SecondsOfTimer = value; }
         public Color RedColor => tl.RedColor;
         public Color YellowColor => tl.YellowColor;
         public Color GreenColor => tl.GreenColor;
         public string LightImage => tl.LightImage;
-        public string SwitchChangeLightText => tl.SwitchChangeLightText; 
+        public string SwitchChangeLightText => tl.SwitchChangeLightText;
         private void ChangeLight()
         {
             tl.ChangeLight();
@@ -36,7 +41,7 @@ namespace TraficLight.ViewModels
 
         private void ColorChanged(TraficLightModel.TraficLight light)
         {
-            switch(light)
+            switch (light)
             {
                 case TraficLightModel.TraficLight.Red:
                     OnPropertyChanged(nameof(RedColor));

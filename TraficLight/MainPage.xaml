@@ -6,26 +6,42 @@
     xmlns:m="clr-namespace:TraficLight.Models"
     xmlns:vm="clr-namespace:TraficLight.ViewModels"
     x:DataType="vm:MainPageVM">
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*" RowSpacing="5">
-        <Frame>
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*" ColumnDefinitions="*,*" RowSpacing="5">
+        <Frame Grid.ColumnSpan="2" HorizontalOptions="Center">
             <BoxView BackgroundColor="{Binding RedColor}" />
         </Frame>
-        <Frame Grid.Row="1">
+        <Frame Grid.ColumnSpan="2" Grid.Row="1" HorizontalOptions="Center">
             <BoxView BackgroundColor="{Binding YellowColor}" />
         </Frame>
-        <Frame Grid.Row="2">
+        <Frame Grid.ColumnSpan="2" Grid.Row="2" HorizontalOptions="Center">
             <BoxView BackgroundColor="{Binding GreenColor}" />
         </Frame>
         <Button
+            HorizontalOptions="Center"
+            Grid.ColumnSpan="2"
             Grid.Row="3"
             Command="{Binding ChangeLightCommand}"
             Text="{x:Static m:Strings.ChangeLightText}" />
         <Button
             Grid.Row="4"
-            Command="{Binding SwitchAutoChangeCommand}"
-            Text="{Binding SwitchChangeLightText}" />
-        <Image
+            Grid.Column="1"
+            Text="{x:Static m:Strings.SubmitButton}"
+            Command="{Binding ChangeTimerTimeCommand}"/>
+        <Entry 
+            Grid.Row="4"          
+            Keyboard="Numeric"
+            Text="{Binding SecondsOfTimer}" 
+            HorizontalTextAlignment="Center"
+            Placeholder="{x:Static m:Strings.ChangeTimerTime }"/>
+        <Button
+            HorizontalOptions="Center"
+            Grid.ColumnSpan="2"
             Grid.Row="5"
+            Command="{Binding SwitchAutoChangeCommand}"
+            Text="{Binding SwitchChangeLightText}"/>
+        <Image
+            Grid.ColumnSpan="2"
+            Grid.Row="6"
             HorizontalOptions="Center"
             Source="{Binding LightImage}"
             VerticalOptions="Center" />

@@ -32,7 +32,7 @@ namespace TraficLight.ModelsLogic
                 lights[(int)TraficLight.Red].IsOn = false;
                 lights[(int)TraficLight.Yellow].IsOn = false;
                 lights[(int)TraficLight.Green].IsOn = true;
-                foreach(TraficLight tl in Enum.GetValues<TraficLight>())
+                foreach (TraficLight tl in Enum.GetValues<TraficLight>())
                     LightChanged?.Invoke(this, new LightChengedEventArgs(tl));
             }
             else if (currentState == TraficLightState.Green)
@@ -41,7 +41,7 @@ namespace TraficLight.ModelsLogic
                 lights[(int)TraficLight.Green].IsOn = false;
                 lights[(int)TraficLight.Yellow].IsOn = true;
                 foreach (TraficLight tl in Enum.GetValues<TraficLight>())
-                    if(tl != TraficLight.Red)
+                    if (tl != TraficLight.Red)
                         LightChanged?.Invoke(this, new LightChengedEventArgs(tl));
             }
             else if (currentState == TraficLightState.Yellow)
@@ -62,6 +62,11 @@ namespace TraficLight.ModelsLogic
                 timer.Start();
             else
                 timer.Stop();
+        }
+
+        public override void ChangeTimerTime()
+        {
+            timer.Interval = SecondsOfTimer * 1000;
         }
     }
 }
